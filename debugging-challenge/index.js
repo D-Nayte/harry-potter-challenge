@@ -91,7 +91,7 @@ chooseRandomButton.addEventListener("click", () => {
   createCards([characters[random]]);
 });
 
-function addEventListernerToChooseButtons(params) {
+const addEventListernerToChooseButtons = () => {
   const chooseButtons = document.querySelectorAll(".choose-button");
 
   chooseButtons.forEach((chooseButton) => {
@@ -99,21 +99,20 @@ function addEventListernerToChooseButtons(params) {
       createCards([characters[e.target.id]]);
     });
   });
-}
+};
 addEventListernerToChooseButtons();
 
-const selects = document.getElementsByTagName("select");
+const selects = document.querySelectorAll("select");
 const resetButton = document.getElementById("reset-button");
 const reset = () => {
   selects.forEach((select) => {
     select.value = "all";
+    createCards(characters);
   });
 };
-
 resetButton.addEventListener("click", reset);
 
 const filterButton = document.getElementById("filter-button");
-
 const filter = () => {
   let filtered = [];
   Array.from(selects).forEach((select) => {
