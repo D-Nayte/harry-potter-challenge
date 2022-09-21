@@ -85,7 +85,6 @@ createCards(characters);
 /* FROM HERE, ALL CODE BELOW CAN BE CHANGED AND REFACTORED */
 
 const chooseRandomButton = document.getElementById("choose-random");
-
 chooseRandomButton.addEventListener("click", () => {
   const random = Math.floor(Math.random() * characters.length);
   createCards([characters[random]]);
@@ -114,11 +113,13 @@ resetButton.addEventListener("click", reset);
 
 const filterButton = document.getElementById("filter-button");
 const filter = () => {
-  let filtered = [];
+  let filtered = characters.map((character) => character);
   Array.from(selects).forEach((select) => {
-    filtered = characters.filter((character) => character[select.name].toLowerCase() === select.value);
+    if (select.value === "all") {
+      return;
+    }
+    filtered = filtered.filter((character) => character[select.name].toLowerCase() === select.value);
   });
   createCards(filtered);
 };
-
 filterButton.addEventListener("click", filter);
