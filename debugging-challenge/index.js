@@ -91,11 +91,16 @@ chooseRandomButton.addEventListener("click", () => {
   createCards([characters[random]]);
 });
 
-const chooseButtons = Array.from(document.getElementsByClassName("choose-button"));
+function addEventListernerToChooseButtons(params) {
+  const chooseButtons = document.querySelectorAll(".choose-button");
 
-chooseButtons[0].addEventListener("click", (e) => {
-  createCards([characters[e.target.id]]);
-});
+  chooseButtons.forEach((chooseButton) => {
+    chooseButton.addEventListener("click", (e) => {
+      createCards([characters[e.target.id]]);
+    });
+  });
+}
+addEventListernerToChooseButtons();
 
 const selects = document.getElementsByTagName("select");
 const resetButton = document.getElementById("reset-button");
