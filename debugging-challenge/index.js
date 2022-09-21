@@ -92,12 +92,13 @@ chooseRandomButton.addEventListener("click", () => {
 });
 
 //choose Button
-const addEventListernerToChooseButtons = () => {
+const addEventListernerToChooseButtons = (charachterlist = characters) => {
   const chooseButtons = document.querySelectorAll(".choose-button");
 
   chooseButtons.forEach((chooseButton) => {
     chooseButton.addEventListener("click", (e) => {
-      createCards([characters[e.target.id]]);
+      console.log("e", e.target);
+      createCards([charachterlist[e.target.id]]);
     });
   });
 };
@@ -131,5 +132,5 @@ filterButton.addEventListener("click", filter);
 //reusable function to create new Cards from given character array incl. choose Button functionality
 const reCreateAllCards = (charachterlist) => {
   createCards(charachterlist);
-  addEventListernerToChooseButtons();
+  addEventListernerToChooseButtons(charachterlist);
 };
