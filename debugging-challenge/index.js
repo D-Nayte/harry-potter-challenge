@@ -84,12 +84,14 @@ createCards(characters);
 
 /* FROM HERE, ALL CODE BELOW CAN BE CHANGED AND REFACTORED */
 
+//Random Button
 const chooseRandomButton = document.getElementById("choose-random");
 chooseRandomButton.addEventListener("click", () => {
   const random = Math.floor(Math.random() * characters.length);
   createCards([characters[random]]);
 });
 
+//choose Button
 const addEventListernerToChooseButtons = () => {
   const chooseButtons = document.querySelectorAll(".choose-button");
 
@@ -101,16 +103,18 @@ const addEventListernerToChooseButtons = () => {
 };
 addEventListernerToChooseButtons();
 
+//Reset button
 const selects = document.querySelectorAll("select");
 const resetButton = document.getElementById("reset-button");
 const reset = () => {
   selects.forEach((select) => {
     select.value = "all";
-    createCards(characters);
+    reCreateAllCards(characters);
   });
 };
 resetButton.addEventListener("click", reset);
 
+//Filter Button
 const filterButton = document.getElementById("filter-button");
 const filter = () => {
   let filtered = characters.map((character) => character);
@@ -120,6 +124,12 @@ const filter = () => {
     }
     filtered = filtered.filter((character) => character[select.name].toLowerCase() === select.value);
   });
-  createCards(filtered);
+  reCreateAllCards(filtered);
 };
 filterButton.addEventListener("click", filter);
+
+//reusable function to create new Cards from given character array incl. choose Button functionality
+const reCreateAllCards = (charachterlist) => {
+  createCards(charachterlist);
+  addEventListernerToChooseButtons();
+};
